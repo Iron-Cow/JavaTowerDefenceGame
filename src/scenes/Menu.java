@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static main.Constants.GAME_SIZE_PX;
+
 public class Menu extends GameScene implements SceneMethods {
 
     private Random random = new Random();
@@ -94,10 +96,15 @@ public class Menu extends GameScene implements SceneMethods {
         bQuit.resetBooleans();
     }
 
+    @Override
+    public void mouseDragged(int x, int y) {
+
+    }
+
     private void initButtons() {
         int w = 150;
         int h = w / 3;
-        int x = 640 / 2 - w / 2;
+        int x = GAME_SIZE_PX / 2 - w / 2;
         int y = 150;
         int yOffset = 100;
         bPlaying = new MyButton("Play", x, y, w, h);

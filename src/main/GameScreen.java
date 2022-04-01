@@ -6,6 +6,9 @@ import inputs.MyMouseListener;
 import javax.swing.JPanel;
 import java.awt.*;
 
+import static main.Constants.BOTTOM_BAR_SIZE_PX;
+import static main.Constants.GAME_SIZE_PX;
+
 public class GameScreen extends JPanel {
 
 
@@ -22,7 +25,7 @@ public class GameScreen extends JPanel {
     }
 
     private void setPanelSize() {
-        size = new Dimension(640, 640);
+        size = new Dimension(GAME_SIZE_PX, GAME_SIZE_PX+BOTTOM_BAR_SIZE_PX);
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);

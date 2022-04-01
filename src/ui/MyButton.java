@@ -3,12 +3,12 @@ package ui;
 import java.awt.*;
 
 public class MyButton {
-    private int x, y, width, height;
+    public int x, y, width, height;
     private String text;
     private Rectangle bounds;
     private boolean mouseOver;
     private boolean mousePressed;
-
+    private int id = -1;
 
 
     public MyButton(String text, int x, int y, int width, int height) {
@@ -19,6 +19,22 @@ public class MyButton {
         this.height = height;
 
         initBounds();
+    }
+
+    // alternative constructor for tile buttons
+    public MyButton(String text, int x, int y, int width, int height, int id) {
+        this.text = text;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.id = id;
+
+        initBounds();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void draw(Graphics g){
@@ -82,5 +98,12 @@ public class MyButton {
         return bounds;
     }
 
+    public boolean isMouseOver(){
+        return mouseOver;
+    }
+
+    public boolean isMousePressed(){
+        return mousePressed;
+    }
 
 }
