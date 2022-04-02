@@ -21,7 +21,7 @@ public class Menu extends GameScene implements SceneMethods {
     private ArrayList<BufferedImage> sprites = new ArrayList<>();
     private BufferedImage img;
     private int tileSize = Constants.TILE_SIZE;
-    private MyButton bPlaying, bSettings, bQuit;
+    private MyButton bPlaying, bEdit, bSettings, bQuit;
 
     public Menu(Game game) {
 
@@ -31,6 +31,35 @@ public class Menu extends GameScene implements SceneMethods {
         initButtons();
     }
 
+    private void importImg() {
+        InputStream is = getClass().getResourceAsStream("/img.png");
+        try {
+            img = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadSprites(){
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 10; x++) {
+                sprites.add(img.getSubimage(x*tileSize, y*tileSize, tileSize, tileSize));
+            }
+
+        }
+    }
+
+    private void initButtons() {
+        int w = 150;
+        int h = w / 3;
+        int x = GAME_SIZE_PX / 2 - w / 2;
+        int y = 150;
+        int yOffset = 100;
+        bPlaying = new MyButton("Play", x, y, w, h);
+        bEdit = new MyButton("Editor", x, y + yOffset, w, h);
+        bSettings = new MyButton("Settings", x, y + yOffset * 2, w, h);
+        bQuit = new MyButton("Quit", x, y + yOffset * 3, w, h);
+    }
 
 
     @Override
@@ -51,6 +80,9 @@ public class Menu extends GameScene implements SceneMethods {
         if (bPlaying.getBounds().contains(x, y)){
             GameStates.setGameState(GameStates.PLAYING);
         }
+        else if (bEdit.getBounds().contains(x, y)){
+            GameStates.setGameState(GameStates.EDITING);
+        }
         else if (bSettings.getBounds().contains(x, y)){
             GameStates.setGameState(GameStates.SETTINGS);
         }
@@ -63,10 +95,14 @@ public class Menu extends GameScene implements SceneMethods {
     @Override
     public void mouseMoved(int x, int y) {
         bPlaying.resetBooleans();
+        bEdit.resetBooleans();
         bSettings.resetBooleans();
         bQuit.resetBooleans();
         if (bPlaying.getBounds().contains(x, y)){
             bPlaying.setMouseOver(true);
+        }
+        else if (bEdit.getBounds().contains(x, y)){
+            bEdit.setMouseOver(true);
         }
         else if (bSettings.getBounds().contains(x, y)){
             bSettings.setMouseOver(true);
@@ -81,6 +117,9 @@ public class Menu extends GameScene implements SceneMethods {
         if (bPlaying.getBounds().contains(x, y)){
             bPlaying.setMousePressed(true);
         }
+        else if (bEdit.getBounds().contains(x, y)){
+            bEdit.setMousePressed(true);
+        }
         else if (bSettings.getBounds().contains(x, y)){
             bSettings.setMousePressed(true);
         }
@@ -92,6 +131,7 @@ public class Menu extends GameScene implements SceneMethods {
     @Override
     public void mouseReleased(int x, int y) {
         bPlaying.resetBooleans();
+        bEdit.resetBooleans();
         bSettings.resetBooleans();
         bQuit.resetBooleans();
     }
@@ -101,19 +141,9 @@ public class Menu extends GameScene implements SceneMethods {
 
     }
 
-    private void initButtons() {
-        int w = 150;
-        int h = w / 3;
-        int x = GAME_SIZE_PX / 2 - w / 2;
-        int y = 150;
-        int yOffset = 100;
-        bPlaying = new MyButton("Play", x, y, w, h);
-        bSettings = new MyButton("Settings", x, y + yOffset, w, h);
-        bQuit = new MyButton("Quit", x, y + yOffset * 2, w, h);
-    }
-
     private void drawButtons(Graphics g) {
         bPlaying.draw(g);
+        bEdit.draw(g);
         bSettings.draw(g);
         bQuit.draw(g);
     }
@@ -125,24 +155,5 @@ public class Menu extends GameScene implements SceneMethods {
                 random.nextInt(256)
         );
     }
-
-    private void loadSprites(){
-        for (int y = 0; y < 3; y++) {
-            for (int x = 0; x < 10; x++) {
-                sprites.add(img.getSubimage(x*tileSize, y*tileSize, tileSize, tileSize));
-            }
-
-        }
-    }
-
-
-
-    private void importImg() {
-        InputStream is = getClass().getResourceAsStream("/img.png");
-        try {
-            img = ImageIO.read(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
+

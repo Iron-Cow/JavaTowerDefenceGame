@@ -3,7 +3,8 @@ package main;
 public enum GameStates {
     PLAYING,
     MENU,
-    SETTINGS;
+    SETTINGS,
+    EDITING;
 
     public static GameStates gameState = MENU;
     public static void setGameState(GameStates state){

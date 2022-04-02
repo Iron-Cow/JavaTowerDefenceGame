@@ -25,6 +25,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     game.getPlaying().mouseClicked(e.getX(), e.getY());
                     break;
                 case SETTINGS:
+                    game.getSettings().mouseClicked(e.getX(), e.getY());
+                    break;
+                case EDITING:
+                    game.getEditor().mouseClicked(e.getX(), e.getY());
                     break;
             }
         }
@@ -41,6 +45,9 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 break;
             case SETTINGS:
                 break;
+            case EDITING:
+                game.getEditor().mousePressed(e.getX(), e.getY());
+                break;
         }
     }
 
@@ -53,6 +60,9 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 game.getPlaying().mouseReleased(e.getX(), e.getY());
                 break;
             case SETTINGS:
+                break;
+            case EDITING:
+                game.getEditor().mouseReleased(e.getX(), e.getY());
                 break;
         }
     }
@@ -76,6 +86,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 game.getPlaying().mouseDragged(e.getX(), e.getY());
                 break;
             case SETTINGS:
+                game.getSettings().mouseMoved(e.getX(), e.getY());
+                break;
+            case EDITING:
+                game.getEditor().mouseDragged(e.getX(), e.getY());
                 break;
         }
     }
@@ -89,6 +103,10 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 game.getPlaying().mouseMoved(e.getX(), e.getY());
                 break;
             case SETTINGS:
+                game.getSettings().mouseMoved(e.getX(), e.getY());
+                break;
+            case EDITING:
+                game.getEditor().mouseMoved(e.getX(), e.getY());
                 break;
         }
     }

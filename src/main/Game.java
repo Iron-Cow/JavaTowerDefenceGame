@@ -1,5 +1,8 @@
 package main;
 
+import helpers.LoadSave;
+import managers.TileManager;
+import scenes.Editing;
 import scenes.Menu;
 import scenes.Playing;
 import scenes.Settings;
@@ -16,14 +19,19 @@ public class Game extends JFrame implements Runnable {
     private Render render;
     private Thread gameThread;
 
+
     // Classes
     private Menu menu;
     private Playing playing;
     private Settings settings;
+    private Editing editing;
+    private TileManager tileManager;
 
 
     public Game(){
+        tileManager = new TileManager();
         initClasses();
+        createDefaultLevel();
 
 
         add(gameScreen);
@@ -41,6 +49,7 @@ public class Game extends JFrame implements Runnable {
         menu = new Menu(this);
         playing = new Playing(this);
         settings = new Settings(this);
+        editing = new Editing(this);
 
     }
 
@@ -127,5 +136,22 @@ public class Game extends JFrame implements Runnable {
 
     public Settings getSettings() {
         return settings;
+    }
+
+    public Editing getEditor() {
+        return editing;
+    }
+
+    private void createDefaultLevel() {
+        int[] arr = new int[400];
+//        for (int i = 0; i < arr.length; i++) {
+//            arr[i] = 0; // id of Tile type
+//        }
+        LoadSave.CreateLevel("new_level", arr);
+    }
+
+
+    public TileManager getTileManager() {
+        return tileManager;
     }
 }
